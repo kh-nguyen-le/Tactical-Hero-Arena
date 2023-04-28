@@ -1,0 +1,83 @@
+{
+    "id": "TOP",
+    "type": "coupled",
+    "ports": {
+        "out": [
+            {
+                "name": "top_out",
+                "message_type": "--",
+                "port_kind": "out"
+            }
+        ]
+    },
+    "ic": [
+        {
+            "from_model": "input_reader",
+            "from_port": "out",
+            "to_model": "Druid",
+            "to_port": "active_in"
+        }
+    ],
+    "eoc": [
+        {
+            "from_model": "Druid",
+            "from_port": "command_out",
+            "to_port": "top_out"
+        }
+    ],
+    "models": [
+        {
+            "id": "input_reader",
+            "type": "atomic",
+            "ports": {
+                "out": [
+                    {
+                        "name": "out",
+                        "message_type": "--",
+                        "port_kind": "out"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "Druid",
+            "type": "atomic",
+            "ports": {
+                "out": [
+                    {
+                        "name": "command_out",
+                        "message_type": "--",
+                        "port_kind": "out"
+                    },
+                    {
+                        "name": "action_out",
+                        "message_type": "--",
+                        "port_kind": "out"
+                    },
+                    {
+                        "name": "stats_out",
+                        "message_type": "--",
+                        "port_kind": "out"
+                    }
+                ],
+                "in": [
+                    {
+                        "name": "command_in",
+                        "message_type": "--",
+                        "port_kind": "in"
+                    },
+                    {
+                        "name": "action_in",
+                        "message_type": "--",
+                        "port_kind": "in"
+                    },
+                    {
+                        "name": "active_in",
+                        "message_type": "--",
+                        "port_kind": "in"
+                    }
+                ]
+            }
+        }
+    ]
+}
