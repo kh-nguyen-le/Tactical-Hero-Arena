@@ -18,13 +18,14 @@
 #include "../data_structures/heroinfo.hpp"
 #include "../data_structures/event.hpp"
 #include "../data_structures/command.hpp"
+#include "../data_structures/action.hpp"
 
 using namespace cadmium;
 using namespace std;
 //Port definition
 struct Hero_ports_defs{
 struct command_out : public out_port<vector<Skill>> {};
-struct action_out : public out_port<Event> {};
+struct action_out : public out_port<Action> {};
 struct stats_out : public out_port<Attribute> {};
 struct command_in : public in_port<Command> {};
 struct action_in : public in_port<Event> {};
@@ -142,7 +143,10 @@ typename make_message_bags<output_ports>::type output() const {
     bag_port_command_out.push_back(state.available);
     get_messages<typename Hero_ports_defs::command_out>(bags) = bag_port_command_out;
   } else if (!state.last_used.empty() && state.active && state.acted) {
-    vector<Event> bag_port_action_out;
+    vector<Action> bag_port_action_out;
+    Action action = Action(state.last_used[0], state.allied_targets, state.enemy_targets, state.name);
+    bag_port_action_out.push_back(action);
+    get_messages<typename Hero_ports_defs::action_out>(bags) = bag_port_action_out;
     
   }
   return bags;

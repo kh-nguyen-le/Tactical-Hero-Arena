@@ -15,5 +15,6 @@ struct Event{
     double amount;
     string source;
     string destination;
+    string team;
 };
 #endif
