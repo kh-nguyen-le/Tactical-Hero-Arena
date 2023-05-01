@@ -51,6 +51,9 @@ struct state_type{
   unordered_map<string, int> cooldowns;
   vector<Skill> available;
   vector<Skill> last_used;
+  list<string> allied_targets;
+  list<string> enemy_targets;
+
 };
 state_type state;
 //Default constructor without parameters
@@ -111,7 +114,9 @@ void external_transition(TIME e, typename make_message_bags<input_ports>::type m
   else if (state.active && state.ready && !state.acted) {
     vector<int> bag_port_command_in;
     bag_port_command_in = get_messages<typename Hero_ports_defs::command_in>(mbs);
-    state.last_used.push_back(skillDB[state.heroClass * bag_port_command_in[0]]);
+    Skill skill = skillDB[state.heroClass * bag_port_command_in[0]];
+    state.last_used.push_back(skill);
+    state.stats.energy -= skill.cost;
     state.ready = false;
     state.acted = true;
   }
@@ -148,20 +153,30 @@ TIME time_advance() const {
 friend ostringstream& operator<<(ostringstream& os, const typename Hero<TIME>::state_type& state) {
   //Define how to log the state here
   os << "<" << state.name << ", " << state.stats << ", " << state.active << ", " << state.alive << ", " << state.ready << ", "
-     << state.acted << ", ";
+     << state.acted << ", <";
   for (auto skl : state.skills) {
     os << "<" << skl << ">";
   }
-  os << ", " << state.heroClass << ", ";
+  os << ">, " << state.heroClass << ", <";
   for (auto [k,v] : state.cooldowns) { 
    os << "<" << k << ": " << v << ">";
   } 
-  os << ", ";
+  os << ">, <";
   for (auto av : state.available)
     os << "<" << av << ">";
-  os << ", ";
+  os << ">, <";
   for (auto lu : state.last_used)
     os << "<" << lu << ">";
+  os << ">, <";
+  for (auto tgt : state.allied_targets) {
+    os << "<"  << tgt << ">";
+  }
+  os << ">, <";
+  for (auto tgt : state.enemy_targets) {
+    os << "<"  << tgt << ">";
+  }
+  os << ">";
+  os << ">";
   return os;
 }
 };
