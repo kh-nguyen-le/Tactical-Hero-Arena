@@ -26,6 +26,9 @@ skill.o: data_structures/skill.cpp
 attribute.o: data_structures/attribute.cpp
 	$(CC) -g -c $(CFLAGS) $(INCLUDECADMIUM) $(INCLUDEDESTIMES) data_structures/attribute.cpp -o build/attribute.o
 
+command.o: data_structures/command.cpp
+	$(CC) -g -c $(CFLAGS) $(INCLUDECADMIUM) $(INCLUDEDESTIMES) data_structures/command.cpp -o build/command.o
+
 # main_top.o: top_model/main.cpp
 # 	$(CC) -g -c $(CFLAGS) $(INCLUDECADMIUM) $(INCLUDEDESTIMES) top_model/main.cpp -o build/main_top.o
 	
@@ -33,8 +36,8 @@ main_hero_test.o: test/main_hero_test.cpp
 	$(CC) -g -c $(CFLAGS) $(INCLUDECADMIUM) $(INCLUDEDESTIMES) $(INCLUDEJSON) test/main_hero_test.cpp -o build/main_hero_test.o
 
 
-tests: main_hero_test.o skillinfo.o heroinfo.o teamcombo.o skill.o attribute.o
-		$(CC) -g -o bin/HERO_TEST build/main_hero_test.o build/skillinfo.o build/heroinfo.o build/teamcombo.o build/skill.o build/attribute.o
+tests: main_hero_test.o skillinfo.o heroinfo.o teamcombo.o skill.o attribute.o command.o
+		$(CC) -g -o bin/HERO_TEST build/main_hero_test.o build/skillinfo.o build/heroinfo.o build/teamcombo.o build/skill.o build/attribute.o build/command.o
 		
 # #TARGET TO COMPILE ONLY ABP SIMULATOR
 # simulator: main_top.o message.o 

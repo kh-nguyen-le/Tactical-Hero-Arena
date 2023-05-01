@@ -45,10 +45,10 @@ class InputReader_String : public iestream_input<string,T> {
 };
 
 template<typename T>
-class InputReader_int : public iestream_input<int,T> {
+class InputReader_Command : public iestream_input<Command,T> {
     public:
-        InputReader_int () = default;
-        InputReader_int (const char* file_path) : iestream_input<int,T>(file_path) {}
+        InputReader_Command () = default;
+        InputReader_Command (const char* file_path) : iestream_input<Command,T>(file_path) {}
 };
 
 int main(){
@@ -59,7 +59,7 @@ int main(){
     shared_ptr<dynamic::modeling::model> input_reader;
     shared_ptr<dynamic::modeling::model> input_reader2;
     input_reader = dynamic::translate::make_dynamic_atomic_model<InputReader_String, TIME, const char*>("input_reader", move(i_input_data));
-    input_reader2 = dynamic::translate::make_dynamic_atomic_model<InputReader_int, TIME, const char*>("input_reader2", move(i_input_data2));
+    input_reader2 = dynamic::translate::make_dynamic_atomic_model<InputReader_Command, TIME, const char*>("input_reader2", move(i_input_data2));
 
     /****** Subnet atomic model instantiation *******************/
     shared_ptr<dynamic::modeling::model> hero;
@@ -81,7 +81,7 @@ int main(){
     dynamic::modeling::ICs ics_TOP;
     ics_TOP = {
         dynamic::translate::make_IC<iestream_input_defs<string>::out, Hero_ports_defs::active_in>("input_reader", heroDB[HeroClass::druid].name),
-        dynamic::translate::make_IC<iestream_input_defs<int>::out, Hero_ports_defs::command_in>("input_reader2", heroDB[HeroClass::druid].name)
+        dynamic::translate::make_IC<iestream_input_defs<Command>::out, Hero_ports_defs::command_in>("input_reader2", heroDB[HeroClass::druid].name)
     };
     shared_ptr<dynamic::modeling::coupled<TIME>> TOP;
     TOP = make_shared<dynamic::modeling::coupled<TIME>>(

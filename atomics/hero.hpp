@@ -17,6 +17,7 @@
 #include "../data_structures/skillinfo.hpp"
 #include "../data_structures/heroinfo.hpp"
 #include "../data_structures/event.hpp"
+#include "../data_structures/command.hpp"
 
 using namespace cadmium;
 using namespace std;
@@ -25,7 +26,7 @@ struct Hero_ports_defs{
 struct command_out : public out_port<vector<Skill>> {};
 struct action_out : public out_port<Event> {};
 struct stats_out : public out_port<Attribute> {};
-struct command_in : public in_port<int> {};
+struct command_in : public in_port<Command> {};
 struct action_in : public in_port<Event> {};
 struct active_in : public in_port<string> {};
 };
@@ -76,6 +77,8 @@ Hero(HeroInfo info) {
   state.heroClass = info.heroClass;
   state.cooldowns = {};
   state.last_used = {};
+  state.allied_targets = {};
+  state.enemy_targets = {};
 }
 
 void internal_transition() {
@@ -94,6 +97,7 @@ void internal_transition() {
     }
     state.active = false;
     state.last_used.clear();
+    state.acted = false;
   }else if (state.active && !state.ready) {
     state.ready = true;
   }
@@ -112,11 +116,14 @@ void external_transition(TIME e, typename make_message_bags<input_ports>::type m
     }
   }
   else if (state.active && state.ready && !state.acted) {
-    vector<int> bag_port_command_in;
+    vector<Command> bag_port_command_in;
     bag_port_command_in = get_messages<typename Hero_ports_defs::command_in>(mbs);
-    Skill skill = skillDB[state.heroClass * bag_port_command_in[0]];
+    Command command = bag_port_command_in[0];
+    Skill skill = skillDB[state.heroClass * command.skill_index];
     state.last_used.push_back(skill);
     state.stats.energy -= skill.cost;
+    state.allied_targets = command.allied_targets;
+    state.enemy_targets = command.enemy_targets;
     state.ready = false;
     state.acted = true;
   }
