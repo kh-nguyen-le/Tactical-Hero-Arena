@@ -5,6 +5,7 @@ INCLUDECADMIUM=-I ~/CADMIUM/Cadmium-Simulation-Environment/cadmium/include
 INCLUDEDESTIMES=-I ~/CADMIUM/Cadmium-Simulation-Environment/DESTimes/include
 INCLUDEJSON=-I ~/CADMIUM/Cadmium-Simulation-Environment/CadmiumModelJSONExporter/include
 
+
 #CREATE BIN AND BUILD FOLDERS TO SAVE THE COMPILED FILES DURING RUNTIME
 bin_folder := $(shell mkdir -p bin)
 build_folder := $(shell mkdir -p build)
@@ -38,9 +39,13 @@ action.o: data_structures/action.cpp
 main_hero_test.o: test/main_hero_test.cpp
 	$(CC) -g -c $(CFLAGS) $(INCLUDECADMIUM) $(INCLUDEDESTIMES) $(INCLUDEJSON) test/main_hero_test.cpp -o build/main_hero_test.o
 
+main_team_test.o: test/main_team_test.cpp
+	$(CC) -g -c $(CFLAGS) $(INCLUDECADMIUM) $(INCLUDEDESTIMES) test/main_team_test.cpp -o build/main_team_test.o
 
-tests: main_hero_test.o skillinfo.o heroinfo.o teamcombo.o skill.o attribute.o command.o action.o
+
+tests: main_hero_test.o main_team_test.o skillinfo.o heroinfo.o teamcombo.o skill.o attribute.o command.o action.o
 		$(CC) -g -o bin/HERO_TEST build/main_hero_test.o build/skillinfo.o build/heroinfo.o build/teamcombo.o build/skill.o build/attribute.o build/command.o build/action.o
+		$(CC) -g -o bin/TEAM_TEST build/main_team_test.o build/skillinfo.o build/heroinfo.o build/teamcombo.o build/skill.o build/attribute.o build/command.o build/action.o
 		
 # #TARGET TO COMPILE ONLY ABP SIMULATOR
 # simulator: main_top.o message.o 
