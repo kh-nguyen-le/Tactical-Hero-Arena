@@ -19,6 +19,7 @@
 #include "../data_structures/event.hpp"
 #include "../data_structures/command.hpp"
 #include "../data_structures/action.hpp"
+#include "../data_structures/herodto.hpp"
 
 using namespace cadmium;
 using namespace std;
@@ -26,7 +27,7 @@ using namespace std;
 struct Hero_ports_defs{
 struct command_out : public out_port<vector<Skill>> {};
 struct action_out : public out_port<Action> {};
-struct stats_out : public out_port<Attribute> {};
+struct stats_out : public out_port<Hero_dto> {};
 struct command_in : public in_port<Command> {};
 struct action_in : public in_port<Event> {};
 struct active_in : public in_port<string> {};
