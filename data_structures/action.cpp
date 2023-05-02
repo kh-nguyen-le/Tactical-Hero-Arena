@@ -3,13 +3,12 @@
 ostream& operator<<(ostream& os, const Action& act) {
   os << "<" << act.last_used << ", <";
   for (auto str: act.allied_targets) {
-    os << "<" << str << ">,";
+    os << "<" << str << ">, ";
   }
-  os << ", <";
   for (auto str: act.enemy_targets) {
-    os << "<" << str << ">,";
+    os << "<" << str << ">, ";
   }
-  os << ", " << act.source << ">";
+  os << act.source << ">";
   return os;
 }
 
