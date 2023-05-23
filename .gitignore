@@ -2,4 +2,5 @@
 *.exe
 simulation_results/*
 bin/*
+build/
 .vscode/
