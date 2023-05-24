@@ -1,4 +1,4 @@
-#include "skill.hpp"
+#include "../include/skill.hpp"
 
 ostream& operator<<(ostream& os, const Target_t& t){
   switch(t) {
@@ -30,6 +30,15 @@ ostream& operator<<(ostream& os, const Skill& skl){
   os << "<" << skl.hero << ", " << skl.name << ", " << skl.description << ", " << skl.enemy_num << ", "
     << skl.enemy_target << ", " << skl.ally_num << ", " << skl.ally_target << ", " << skl.dmg_mult << ", "
     << skl.heal_mult << ", " << skl.cooldown << ", " << skl.cost << ">";
+  return os;
+}
+
+ostream& operator<<(ostream& os, const vector<Skill>& vec) {
+  os << "[";
+  for (auto skill: vec) {
+    os << skill << ", ";
+  }
+  os << "]";
   return os;
 }
 

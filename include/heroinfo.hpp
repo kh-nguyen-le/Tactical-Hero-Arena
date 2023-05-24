@@ -7,8 +7,8 @@
 #include <list>
 #include <unordered_map>
 
-#include "../data_structures/attribute.hpp"
-#include "../data_structures/skill.hpp"
+#include "attribute.hpp"
+#include "skill.hpp"
 
 using namespace std;
 

@@ -1,4 +1,4 @@
-#include "teamcombo.hpp"
+#include "../include/teamcombo.hpp"
 
 unordered_map<int, list<int>> combos = {
   {1, list<int>({HeroClass::druid, HeroClass::paladin, HeroClass::warlock, HeroClass::samurai})},

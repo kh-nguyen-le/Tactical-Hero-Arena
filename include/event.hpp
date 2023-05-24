@@ -17,4 +17,7 @@ struct Event{
     string destination;
     string team;
 };
+
+ostream& operator<<(ostream& os, const Event evt);
+
 #endif

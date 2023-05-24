@@ -1,4 +1,4 @@
-#include "command.hpp"
+#include "../include/command.hpp"
 #include <string.h>
 #include <sstream>
 

@@ -1,4 +1,4 @@
-#include "attribute.hpp"
+#include "../include/attribute.hpp"
 
 ostream& operator<<(ostream& os, const Attribute& att) {
   os << "<" << att.base_hp << ", " << att.current_hp << ", " << att.max_hp << ", " << att.base_attack << ", "

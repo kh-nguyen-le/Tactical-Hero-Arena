@@ -4,6 +4,7 @@
 #include <assert.h>
 #include <iostream>
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -44,5 +45,8 @@ struct Skill{
 istream& operator>> (istream& is, Skill& skl);
 
 ostream& operator<<(ostream& os, const Skill& skl);
+
+ostream& operator<<(ostream& os, const vector<Skill>& vec);
+
 
 #endif

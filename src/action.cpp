@@ -1,4 +1,4 @@
-#include "action.hpp"
+#include "../include/action.hpp"
 
 ostream& operator<<(ostream& os, const Action& act) {
   os << "<" << act.last_used << ", <";

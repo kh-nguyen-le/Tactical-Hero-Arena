@@ -3,9 +3,9 @@
 
 #include <list>
 
-#include "../data_structures/attribute.hpp"
-#include "../data_structures/skill.hpp"
-#include "../data_structures/heroinfo.hpp"
+#include "attribute.hpp"
+#include "skill.hpp"
+#include "heroinfo.hpp"
 
 struct Hero_dto {
   string name;
@@ -13,5 +13,7 @@ struct Hero_dto {
   list<Skill> skills;
   HeroClass heroClass;
 };
+
+ostream& operator<<(ostream& os, const Hero_dto dto);
 
 #endif

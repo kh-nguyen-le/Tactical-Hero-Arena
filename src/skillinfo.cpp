@@ -1,5 +1,5 @@
-#include "heroinfo.hpp"
-#include "skillinfo.hpp"
+#include "../include/heroinfo.hpp"
+#include "../include/skillinfo.hpp"
 
 SkillDB skillDB = {
   {HeroClass::druid*1, Skill("Druid", "Swipe", "Deal 120\% ATK to target hero", 1, Target_t::normal, 0, Target_t::normal, 120, 0, 0, 0)},

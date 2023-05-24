@@ -1,5 +1,5 @@
-#include "heroinfo.hpp"
-#include "skillinfo.hpp"
+#include "../include/heroinfo.hpp"
+#include "../include/skillinfo.hpp"
 
 HeroDB heroDB = {
   {HeroClass::druid, HeroInfo("Druid", Attribute(21000,200,20,50),{skillDB[HeroClass::druid*1], skillDB[HeroClass::druid*2], skillDB[HeroClass::druid*3]}, HeroClass::druid)},

@@ -8,7 +8,7 @@
 #include <unordered_map>
 
 
-#include "../data_structures/skill.hpp"
+#include "skill.hpp"
 
 using namespace std;
 
