@@ -1,5 +1,5 @@
 set(SOURCE_FILES
-  main_hero_test.cpp
+  main_team_test.cpp
   action.cpp
   attribute.cpp
   command.cpp

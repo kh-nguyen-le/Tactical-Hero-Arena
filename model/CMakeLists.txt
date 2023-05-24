@@ -1,6 +1,7 @@
 # Add header files for the target
 set(HEADER_FILES
     hero.hpp
+    team.hpp
     testhero.hpp
 )
 
