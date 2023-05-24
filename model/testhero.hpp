@@ -11,19 +11,10 @@ class TestHero: public cadmium::Coupled {
     active_in = addInPort<std::string>("active_in");
     command_out = addOutBigPort<std::vector<Skill>>("command_out");
 
-    auto state = HeroState();
-    state.name = "hero";
-    state.stats = Attribute(10000, 500, 50, 75);
-    state.active = false;
-    state.acted = false;
-    state.ready = false;
-    state.alive = true;
-    state.skills.push_back(skillDB[0]);
-    state.skills.push_back(skillDB[1]);
-    state.skills.push_back(skillDB[2]);
-    state.heroClass = druid;
+    auto heroinfo = heroDB[druid];
+    auto state = HeroState(heroinfo);
 
-    auto hero = addComponent<Hero>("hero", state);
+    auto hero = addComponent<Hero>(heroinfo.name, state);
     addCoupling(active_in, hero->active_in);
     addCoupling(hero->command_out, command_out);
   }

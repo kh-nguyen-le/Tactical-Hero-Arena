@@ -37,7 +37,17 @@ struct HeroState{
   vector<Skill> last_used;
   list<string> allied_targets;
   list<string> enemy_targets;
-
+  HeroState(HeroInfo info): name(info.name), stats(info.stats), skills(info.skills), heroClass(info.heroClass) {
+    this->active = false;
+    this->ready = false;
+    this->acted = false;
+    this->alive = true;
+    this->cooldowns = {};
+    this->available = {};
+    this->last_used = {};
+    this->allied_targets = {};
+    this->enemy_targets = {};
+  }
 };
 
 ostream& operator<<(ostream& os, const HeroState& state) {
