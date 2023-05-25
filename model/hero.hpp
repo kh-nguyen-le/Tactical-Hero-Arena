@@ -154,7 +154,7 @@ class Hero: public Atomic<HeroState> {
       }
       else if (state.active && state.ready && !state.acted) {
         for (const auto& m: command_in->getBag()) {
-          Skill skill = skillDB[state.heroClass * m->skill_index];
+          Skill skill = skillDB[state.heroClass * 3 - (3 - m->skill_index)];
           state.last_used.push_back(skill);
           state.stats.energy -= skill.cost;
           state.allied_targets = m->allied_targets;
