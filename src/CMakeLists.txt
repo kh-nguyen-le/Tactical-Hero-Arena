@@ -1,5 +1,6 @@
 set(SOURCE_FILES
   main_team_test.cpp
+  packet.cpp
   action.cpp
   attribute.cpp
   command.cpp
