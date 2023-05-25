@@ -1,6 +1,5 @@
 set(SOURCE_FILES
-  main_team_test.cpp
-  packet.cpp
+  main_mux_test.cpp
   action.cpp
   attribute.cpp
   command.cpp
