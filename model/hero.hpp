@@ -83,7 +83,7 @@ ostream& operator<<(ostream& os, const HeroState& state) {
 class Hero: public Atomic<HeroState> {
   public:
 
-    Port<string> active_in;
+    BigPort<string> active_in;
     BigPort<Event> action_in;
     BigPort<Command> command_in;
     BigPort<vector<Skill>> command_out;
@@ -91,7 +91,7 @@ class Hero: public Atomic<HeroState> {
     BigPort<Hero_dto> stats_out;
 
     Hero(string id, HeroState initialState): Atomic<HeroState>(id, initialState) {
-      active_in = addInPort<string>("active_in");
+      active_in = addInBigPort<string>("active_in");
       action_in = addInBigPort<Event>("action_in");
       command_in = addInBigPort<Command>("command_in");
       command_out = addOutBigPort<vector<Skill>>("command_out");
@@ -144,7 +144,7 @@ class Hero: public Atomic<HeroState> {
     void externalTransition(HeroState& state, double e) const override {
       if (!state.active && !state.ready && !state.acted) {
         for (const auto& m: active_in->getBag()) {
-          if (m.compare("active_in") == 0) {
+          if (m->compare("active_in") == 0) {
             state.stats.energy = min(state.stats.energy + 2, state.stats.max_energy);
             copy_if(state.skills.begin(), state.skills.end(), back_inserter(state.available),
               [state](Skill s){return state.cooldowns.count(s.name) == 0 && s.cost <= state.stats.energy;});

@@ -29,7 +29,7 @@ class Team: public Coupled {
       auto info = heroDB[hclass];
       auto state = HeroState(info);
 
-      auto active_in = addInPort<string>("active_in_" + (i + 1));
+      auto active_in = addInBigPort<string>("active_in_" + (i + 1));
       auto action_in = addInBigPort<Event>("action_in_" + (i + 1));
       auto command_in = addInBigPort<Command>("command_in_" + (i + 1));
       auto command_out = addOutBigPort<vector<Skill>>("command_out_" + (i + 1));
